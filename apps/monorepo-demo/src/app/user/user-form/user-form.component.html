@@ -12,5 +12,5 @@
     <label for="phone">Téléphone :</label>
     <input id="phone" type="text" formControlName="phone" />
 
-    <button (click)="submit()">Créer</button>
+    <button (click)="submit()" [disabled]="form.invalid">Créer</button>
 </form>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from '../user.component';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -16,10 +16,10 @@ export class UserFormComponent {
 
   constructor(private userService: UserService) {
     this.form = new FormGroup({
-      firstname: new FormControl(),
-      lastname: new FormControl(),
-      email: new FormControl(),
-      phone: new FormControl(),
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
     })
     console.log('Composant formulaire construit !');
   }
