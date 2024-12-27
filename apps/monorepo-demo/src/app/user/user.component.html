@@ -8,15 +8,17 @@
           <th>Nom</th>
           <th>Email</th>
           <th>Téléphone</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users, trackBy: trackByUserId" (click)="updateUser(user.id, 'updatedEmail@example.com')">
+        <tr *ngFor="let user of users, trackBy: trackByUserId">
           <td>{{ user.id }}</td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
-          <td>{{ user.email }}</td>
+          <td (click)="updateUser(user.id, 'updatedEmail@example.com')">{{ user.email }}</td>
           <td>{{ user.phone }}</td>
+          <td><button (click)="deleteUser(user)">SUPPRIMER</button></td>
         </tr>
       </tbody>
     </table>

@@ -34,4 +34,18 @@ export class UserService {
   getUsersObservable(): Observable<User[]> {
     return of(this.users);
   }
+
+  addUser(user: User) {
+    let maxId = this.users.map(el => el.id).sort((a,b) => b - a)[0];
+    user.id = maxId + 1;
+    this.users.push(user);    
+  }
+
+  deleteUser(user: User): Promise<User[]> {
+    return new Promise((resolve) => {
+      let userId = user.id;
+      this.users = this.users.filter(user => user.id != userId);
+      resolve(this.users);
+    });    
+  }
 }

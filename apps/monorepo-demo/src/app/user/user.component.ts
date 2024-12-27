@@ -62,6 +62,12 @@ export class UserComponent implements OnInit, OnDestroy {
     }
   }
 
+  deleteUser(user: User) {
+    this.userService.deleteUser(user).then(users => {
+      this.users = users;
+    });
+  }
+
   trackByUserId(index: number, user: { id: number }) {
     return user.id; // Utilise l'ID unique pour suivre l'élément
   }

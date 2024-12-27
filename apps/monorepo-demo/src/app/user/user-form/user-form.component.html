@@ -1,16 +1,16 @@
 <h3>Ajouter un utilisateur</h3>
-<form>
+<form [formGroup]="form">
     <label for="firstname">Prénom :</label>
-    <input id="firstname" type="text" />
+    <input id="firstname" type="text" formControlName="firstname" />
 
     <label for="lastname">Nom :</label>
-    <input id="lastname" type="text" />
+    <input id="lastname" type="text" formControlName="lastname" />
 
     <label for="email">Email :</label>
-    <input id="email" type="email" />
+    <input id="email" type="email" formControlName="email" />
 
     <label for="phone">Téléphone :</label>
-    <input id="phone" type="text" />
+    <input id="phone" type="text" formControlName="phone" />
 
-    <button type="submit">Créer</button>
+    <button (click)="submit()">Créer</button>
 </form>
