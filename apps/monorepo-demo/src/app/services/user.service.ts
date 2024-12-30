@@ -22,6 +22,10 @@ export class UserService {
 
   constructor() { }
 
+  isLoggedIn() {
+    return true;
+  }
+
   getUsers(rejection?: boolean): Promise<User[]> {
     return new Promise((resolve, reject) => {
       if (rejection) reject('Forced Rejection !');
@@ -33,6 +37,10 @@ export class UserService {
 
   getUsersObservable(): Observable<User[]> {
     return of(this.users);
+  }
+
+  getInstantUsers(): User[] {
+    return this.users;
   }
 
   addUser(user: User) {

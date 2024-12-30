@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { CanComponentDeactivate } from '../guards/exit.guard';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface User {
   id: number;
@@ -17,18 +19,36 @@ export interface User {
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit, OnDestroy {
+export class UserComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   private userSubscription$ = new Subject<void>();
   users: User[] = [];
 
   @ViewChild('formContainer', { read: ViewContainerRef })
   formContainer!: ViewContainerRef;
 
-  constructor(private cdr: ChangeDetectorRef, private userService: UserService) { }
+  constructor(private cdr: ChangeDetectorRef,
+    private userService: UserService,
+    private router: Router, 
+    private route: ActivatedRoute) {
+    }
 
   ngOnInit(): void {
-    this.loadUsers();
+    // this.loadUsers();
+
+    this.route.data.subscribe(data => {
+      this.users = data['users'];
+    });
+
+
     // this.loadUsersFromObservable();
+  }
+
+  canDeactivate (): Observable<boolean> | Promise<boolean> | boolean {
+    return confirm('Voulez-vous quitter cette page ?');
+  };
+
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 
   loadUsers() {
