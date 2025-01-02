@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { User } from '../user.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Store } from '@ngrx/store';
+import { UserState } from '../../store/user.reducer';
+import { addUser } from '../../store/user.actions';
 
 @Component({
   selector: 'app-user-form',
@@ -14,7 +17,7 @@ export class UserFormComponent {
   user?: User;
   form: FormGroup;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private store: Store<UserState>) {
     this.form = new FormGroup({
       firstname: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
@@ -33,5 +36,6 @@ export class UserFormComponent {
       phone: this.form.value.phone,
     };
     this.userService.addUser(this.user);
+    this.store.dispatch(addUser(this.user));
   }
 }
