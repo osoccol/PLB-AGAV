@@ -1,16 +1,30 @@
 <h3>Ajouter un utilisateur</h3>
 <form [formGroup]="form">
-    <label for="firstname">Prénom :</label>
-    <input id="firstname" type="text" formControlName="firstname" />
+    <div>
+        <label for="firstname">Prénom :</label>
+        <input id="firstname" type="text" formControlName="firstname"
+            [ngClass]="{'invalid': form.get('firstname')?.invalid}" />
+        <p class="error"></p>
+    </div>
 
-    <label for="lastname">Nom :</label>
-    <input id="lastname" type="text" formControlName="lastname" />
+    <div>
+        <label for="lastname">Nom :</label>
+        <input id="lastname" type="text" formControlName="lastname"
+            [ngClass]="{'invalid': form.get('lastname')?.invalid}" />
+        <p class="error"></p>
+    </div>
 
-    <label for="email">Email :</label>
-    <input id="email" type="email" formControlName="email" />
+    <div>
+        <label for="email">Email :</label>
+        <input id="email" type="email" formControlName="email" [ngClass]="{'invalid': form.get('email')?.invalid}" />
+        <p class="error"></p>
+    </div>
 
-    <label for="phone">Téléphone :</label>
-    <input id="phone" type="text" formControlName="phone" />
+    <div>
+        <label for="phone">Téléphone :</label>
+        <input id="phone" type="text" formControlName="phone" [ngClass]="{'invalid': form.get('phone')?.invalid}" />
+        <p class="error"></p>
+    </div>
 
     <button (click)="submit()" [disabled]="form.invalid">Créer</button>
 </form>
