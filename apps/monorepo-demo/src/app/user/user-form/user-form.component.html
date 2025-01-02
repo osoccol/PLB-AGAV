@@ -2,27 +2,25 @@
 <form [formGroup]="form">
     <div>
         <label for="firstname">Prénom :</label>
-        <input id="firstname" type="text" formControlName="firstname"
-            [ngClass]="{'invalid': form.get('firstname')?.invalid}" />
+        <input id="firstname" type="text" formControlName="firstname" />
         <p class="error"></p>
     </div>
 
     <div>
         <label for="lastname">Nom :</label>
-        <input id="lastname" type="text" formControlName="lastname"
-            [ngClass]="{'invalid': form.get('lastname')?.invalid}" />
+        <input id="lastname" type="text" formControlName="lastname" />
         <p class="error"></p>
     </div>
 
     <div>
         <label for="email">Email :</label>
-        <input id="email" type="email" formControlName="email" [ngClass]="{'invalid': form.get('email')?.invalid}" />
+        <input id="email" type="email" formControlName="email" />
         <p class="error"></p>
     </div>
 
     <div>
         <label for="phone">Téléphone :</label>
-        <input id="phone" type="text" formControlName="phone" [ngClass]="{'invalid': form.get('phone')?.invalid}" />
+        <input id="phone" type="text" formControlName="phone" />
         <p class="error"></p>
     </div>
 
