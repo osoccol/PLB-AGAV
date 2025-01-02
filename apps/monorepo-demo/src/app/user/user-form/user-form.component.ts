@@ -55,5 +55,6 @@ export class UserFormComponent {
     };
     this.userService.addUser(this.user);
     this.store.dispatch(addUser(this.user));
+    this.form.reset();
   }
 }

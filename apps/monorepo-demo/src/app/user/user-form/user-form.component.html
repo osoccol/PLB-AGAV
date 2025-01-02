@@ -3,25 +3,42 @@
     <div>
         <label for="firstname">Prénom :</label>
         <input id="firstname" type="text" formControlName="firstname" />
-        <p class="error"></p>
+        <p *ngIf="form.get('firstname')?.invalid && form.get('firstname')?.touched" class="error">
+            Le prénom est requis.
+        </p>
     </div>
 
     <div>
         <label for="lastname">Nom :</label>
         <input id="lastname" type="text" formControlName="lastname" />
-        <p class="error"></p>
+        <p *ngIf="form.get('lastname')?.invalid && form.get('lastname')?.touched" class="error">
+            Le nom est requis.
+        </p>
     </div>
 
     <div>
         <label for="email">Email :</label>
         <input id="email" type="email" formControlName="email" />
-        <p class="error"></p>
+        <p *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched" class="error">
+            L'email est requis.
+        </p>
+        <p *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched" class="error">
+            L'email est invalide.
+        </p>
+        <p *ngIf="form.get('email')?.hasError('emailTaken') && form.get('email')?.touched" class="error">
+            Cet email est déjà pris.
+        </p>
     </div>
 
     <div>
         <label for="phone">Téléphone :</label>
         <input id="phone" type="text" formControlName="phone" />
-        <p class="error"></p>
+        <p *ngIf="form.get('phone')?.hasError('required') && form.get('phone')?.touched" class="error">
+            Le numéro de téléphone est requis.
+        </p>
+        <p *ngIf="form.get('phone')?.hasError('invalidPhone') && form.get('phone')?.touched" class="error">
+            Le numéro de téléphone n'est pas valide.
+        </p>
     </div>
 
     <button (click)="submit()" [disabled]="form.invalid">Créer</button>
