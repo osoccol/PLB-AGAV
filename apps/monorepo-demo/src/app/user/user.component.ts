@@ -92,6 +92,10 @@ export class UserComponent implements OnInit, OnDestroy, CanComponentDeactivate 
     return user.id; // Utilise l'ID unique pour suivre l'élément
   }
 
+  add(a: number, b: number) {
+    return a + b;
+  }
+
   ngOnDestroy(): void {
       this.userSubscription$.next();
       this.userSubscription$.complete();
