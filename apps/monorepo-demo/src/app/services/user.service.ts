@@ -56,4 +56,8 @@ export class UserService {
       resolve(this.users);
     });    
   }
+
+  hasEmail(email: string): boolean {
+    return this.users.map(el => el.email).includes(email)
+  }
 }

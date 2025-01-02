@@ -1,11 +1,29 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from '../user.component';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Store } from '@ngrx/store';
 import { UserState } from '../../store/user.reducer';
 import { addUser } from '../../store/user.actions';
+
+export function phoneValidator(control: AbstractControl) {
+  const regex = /^[0-9]{10}$/;
+  return regex.test(control.value) ? null : { invalidPhone: true };
+}
+
+export function emailExistsValidator(userService: UserService): AsyncValidatorFn {
+  return (control: AbstractControl) => {
+    let val = control.value;
+    return new Promise((resolve) => {
+      if (userService.hasEmail(val)) {
+        resolve({ emailTaken: true });
+      } else {
+        resolve(null);
+      }
+    });
+  };
+}
 
 @Component({
   selector: 'app-user-form',
@@ -21,8 +39,8 @@ export class UserFormComponent {
     this.form = new FormGroup({
       firstname: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email], [emailExistsValidator(this.userService)]),
+      phone: new FormControl('', [Validators.required, phoneValidator]),
     })
     console.log('Composant formulaire construit !');
   }
