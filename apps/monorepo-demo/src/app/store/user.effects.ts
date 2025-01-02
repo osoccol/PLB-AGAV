@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
 import { addUser } from './user.actions';
 
@@ -13,4 +13,15 @@ export class UserEffects {
             })
         ).subscribe();        
     }
+
+    // logUserActions$ = createEffect(
+    //     () => this.actions$.pipe(
+    //       ofType(addUser),
+    //       tap(action => {
+    //         console.log('Utilisateur ajouté :', action.user);
+    //       })
+    //     ),
+    //     { dispatch: false }
+    //   );
+      
 }
