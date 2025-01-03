@@ -5,12 +5,28 @@
   "prefix": "app",
   "sourceRoot": "apps/monorepo-demo/src",
   "tags": [],
+  "i18n": {
+    "sourceLocale": "fr-FR",
+    "locales": {
+      "en-GB" : {
+        "translation": "apps/monorepo-demo/src/locale/messages.en.xlf",
+        "baseHref": "en-GB/"
+      },
+      "es-ES" : {
+        "translation": "apps/monorepo-demo/src/locale/messages.es.xlf",
+        "baseHref": "es-ES/"
+      }
+    }
+  },
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/monorepo-demo",
+        "localize": [
+          "en-GB"
+        ],
         "index": "apps/monorepo-demo/src/index.html",
         "browser": "apps/monorepo-demo/src/main.ts",
         "polyfills": ["zone.js"],
@@ -22,7 +38,9 @@
           }
         ],
         "styles": ["apps/monorepo-demo/src/styles.css"],
-        "scripts": []
+        "scripts": [
+          "node_modules/@angular/localize/init/index.d.ts"
+        ]
       },
       "configurations": {
         "production": {

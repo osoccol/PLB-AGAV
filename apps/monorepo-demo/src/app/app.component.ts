@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -8,5 +9,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'monorepo-demo';
+  title = $localize `Mon Premier Monorepo !`;
+
+  constructor(private titleService: Title) {
+    this.titleService.setTitle(this.title)
+  }
 }
