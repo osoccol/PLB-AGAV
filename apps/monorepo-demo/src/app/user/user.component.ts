@@ -4,6 +4,8 @@ import { UserService } from '../services/user.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { CanComponentDeactivate } from '../guards/exit.guard';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { usersSelector, UserState } from '../store/user.reducer';
 
 export interface User {
   id: number;
@@ -22,14 +24,17 @@ export interface User {
 export class UserComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   private userSubscription$ = new Subject<void>();
   users: User[] = [];
+  users$: Observable<User[]>;
 
   @ViewChild('formContainer', { read: ViewContainerRef })
   formContainer!: ViewContainerRef;
 
   constructor(private cdr: ChangeDetectorRef,
     private userService: UserService,
+    private store: Store<UserState>,
     private router: Router, 
     private route: ActivatedRoute) {
+      this.users$ = this.store.select(usersSelector);
     }
 
   ngOnInit(): void {
@@ -39,7 +44,8 @@ export class UserComponent implements OnInit, OnDestroy, CanComponentDeactivate 
       this.users = data['users'];
     });
 
-
+    this.users$.subscribe(val => console.log(val));
+    
     // this.loadUsersFromObservable();
   }
 

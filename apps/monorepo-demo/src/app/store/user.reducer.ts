@@ -4,17 +4,22 @@ import { User } from "../user/user.component";
 
 export interface UserState {
     users: User[];
+    error: string | null;
+    isLogged: boolean;
 }
 
-const initialState: User[] = [];
+const userInitialState: UserState = {
+    users: [],
+    error: null,
+    isLogged: false
+}
 
 export const userReducer = createReducer(
-    initialState,
-    on(addUser, (state, { user }) => [...state, user]),
-
+    userInitialState,
+    on(addUser, (state, { user }) => ({ users: [...state.users, user], error: state.error, isLogged: state.isLogged })),
 )
 
-export const userSelector = createSelector(
+export const usersSelector = createSelector(
     (state: UserState) => state.users,
     (users: User[]) => users
 )

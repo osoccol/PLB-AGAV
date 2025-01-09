@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes,
     withPreloading(NoPreloading)), // PreloadAllModules si on veut charger toute l'application au démarrage
     provideStore({ users: userReducer}),
-    provideEffects(UserEffects),
+    provideEffects([UserEffects]),
     provideStoreDevtools()
   ],
 };
