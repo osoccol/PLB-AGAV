@@ -34,4 +34,15 @@ describe('UserComponent', () => {
     expect(component.add(0, 0)).toEqual(0);
     expect(component.add(-4, -2)).toEqual(-6);
   });
+
+  // TDD
+  it('should multiply numbers', () => {
+    expect(component.product([2, 4, 5])).toEqual(40);
+    expect(component.product([23, 4, 0])).toEqual(0);
+    expect(component.product([23, 4])).toEqual(92);
+    expect(component.product([23])).toEqual(23);
+    expect(component.product([2, 2, 2, 2, -2])).toEqual(-32);
+    expect(component.product([])).toEqual(1);
+  });
+
 });

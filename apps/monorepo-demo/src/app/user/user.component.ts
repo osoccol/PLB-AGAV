@@ -96,6 +96,10 @@ export class UserComponent implements OnInit, OnDestroy, CanComponentDeactivate 
     return a + b;
   }
 
+  product(numbers: number[]) {
+    return numbers.reduce((prod, number) => prod * number, 1);
+  }
+
   ngOnDestroy(): void {
       this.userSubscription$.next();
       this.userSubscription$.complete();
