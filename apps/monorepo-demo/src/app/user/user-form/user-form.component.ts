@@ -4,8 +4,8 @@ import { User } from '../user.component';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Store } from '@ngrx/store';
-import { UserState } from '../../store/user.reducer';
-import { addUser } from '../../store/user.actions';
+import { AppState } from '../../store/app.reducer';
+import { addUser } from '../../store/app.actions';
 
 export function phoneValidator(control: AbstractControl) {
   const regex = /^[0-9]{10}$/;
@@ -35,7 +35,7 @@ export class UserFormComponent {
   user?: User;
   form: FormGroup;
 
-  constructor(private userService: UserService, private store: Store<UserState>) {
+  constructor(private userService: UserService, private store: Store<AppState>) {
     this.form = new FormGroup({
       firstname: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),

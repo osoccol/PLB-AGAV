@@ -4,6 +4,9 @@ import { UserService } from '../services/user.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { CanComponentDeactivate } from '../guards/exit.guard';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.reducer';
+import { decrementCounter, doNothing, incrementCounter, resetCounter } from '../store/app.actions';
 
 export interface User {
   id: number;
@@ -28,6 +31,7 @@ export class UserComponent implements OnInit, OnDestroy, CanComponentDeactivate 
 
   constructor(private cdr: ChangeDetectorRef,
     private userService: UserService,
+    private store: Store<AppState>,
     private router: Router, 
     private route: ActivatedRoute) {
     }
@@ -46,6 +50,22 @@ export class UserComponent implements OnInit, OnDestroy, CanComponentDeactivate 
   canDeactivate (): Observable<boolean> | Promise<boolean> | boolean {
     return confirm('Voulez-vous quitter cette page ?');
   };
+
+  incrementCounter() {
+    this.store.dispatch(incrementCounter());
+  }
+
+  decrementCounter() {
+    this.store.dispatch(decrementCounter());
+  }
+
+  resetCounter() {
+    this.store.dispatch(resetCounter());
+  }
+
+  neFaitRien() {
+    this.store.dispatch(doNothing(5));
+  }
 
   goToLogin() {
     this.router.navigate(['/login']);

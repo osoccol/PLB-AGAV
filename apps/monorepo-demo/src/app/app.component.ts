@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { HeaderModule } from './header/header.module';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterModule, HeaderModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
